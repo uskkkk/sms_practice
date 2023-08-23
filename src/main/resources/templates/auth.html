@@ -12,18 +12,11 @@
 
 <div class="container">
     <h2>SMS 내역 조회</h2>
-    <table class="table table-bordered">
-        <thead>
-        <tr>
-            <th>requestId</th>
-            <th>요청 시간</th>
-            <th>Status Code</th>
-            <th>Status Name</th>
-        </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
+    <form th:action="@{/sms/auth}" method="post">
+        <div>인증번호</div>
+        <input type="text" name="codeNum" placeholder="인증번호를 입력해주세요.">
+        <button class="btn btn-default">전송</button>
+    </form>
 </div>
 
 </body>

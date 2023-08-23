@@ -89,7 +89,8 @@ public class SmsService {
                 .contentType("COMM")
                 .countryCode("82")
                 .from(phone)
-                .content(messageDto.getContent())
+                .content(
+                        messageDto.randomNumber())
                 .messages(messages)
                 .build();
 

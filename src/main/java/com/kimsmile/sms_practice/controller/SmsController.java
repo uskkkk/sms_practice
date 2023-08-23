@@ -23,6 +23,8 @@ public class SmsController {
 
     private final SmsService smsService;
 
+    private static String codeNum;
+
     @GetMapping("/send")
     public String getSmsPage() {
         return "sendSms";
@@ -30,8 +32,22 @@ public class SmsController {
 
     @PostMapping("/sms/send")
     public String sendSms(MessageDTO messageDto, Model model) throws JsonProcessingException, RestClientException, URISyntaxException, InvalidKeyException, NoSuchAlgorithmException, UnsupportedEncodingException, InvalidKeyException {
+
         SmsResponseDTO response = smsService.sendSms(messageDto);
+
+        this.codeNum = messageDto.getCodeNum();
+
         model.addAttribute("response", response);
+        return "auth";
+    }
+
+    @PostMapping("/sms/auth")
+    public String authSms(String codeNum) throws Exception {
+
+        if(!this.codeNum.equals(codeNum)) {
+            throw new Exception("번호가 일치하지 않습니다.");
+        }
+
         return "result";
     }
 }
